@@ -45,6 +45,7 @@ describe('midiToFrequency', () => {
 
 describe('note names', () => {
   it('spells chromatic notes with sharps', () => {
+    expect(midiToNoteName(40)).toBe('E2');
     expect(midiToNoteName(60)).toBe('C4');
     expect(midiToNoteName(61)).toBe('C#4');
     expect(midiToNoteName(70)).toBe('A#4');
@@ -65,12 +66,19 @@ describe('note names', () => {
 });
 
 describe('isInRange', () => {
+  it('covers the bass and baritone range', () => {
+    expect(MIN_MIDI).toBe(40); // E2
+    expect(MAX_MIDI).toBe(72); // C5
+    expect(isInRange(43)).toBe(true); // G2, low baritone
+    expect(isInRange(45)).toBe(true); // A2
+  });
+
   it('accepts the range limits', () => {
     expect(isInRange(MIN_MIDI)).toBe(true);
     expect(isInRange(MAX_MIDI)).toBe(true);
   });
 
-  it('rejects notes outside C3 to C5', () => {
+  it('rejects notes outside E2 to C5', () => {
     expect(isInRange(MIN_MIDI - 1)).toBe(false);
     expect(isInRange(MAX_MIDI + 1)).toBe(false);
   });

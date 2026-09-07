@@ -1,4 +1,4 @@
-import { midiToNoteName } from '../engine/music.js';
+import { frequencyToMidi, MAX_MIDI, MIN_MIDI, midiToNoteName } from '../engine/music.js';
 import {
   accuracy,
   INITIAL_STATE,
@@ -6,7 +6,7 @@ import {
   type RoundState,
   reduce,
 } from '../engine/round.js';
-import { createStabilityTracker, type Rejection } from '../engine/stability.js';
+import { createStabilityTracker, type PitchSample, type Rejection } from '../engine/stability.js';
 import {
   type Microphone,
   MicrophoneError,
@@ -26,6 +26,7 @@ interface Elements {
   prompt: HTMLElement;
   staff: HTMLDivElement;
   feedback: HTMLElement;
+  detector: HTMLElement;
   rounds: HTMLElement;
   firstTry: HTMLElement;
   accuracy: HTMLElement;
@@ -45,7 +46,7 @@ const MIDI_MESSAGES: Record<MidiStatus, string> = {
 };
 
 const REJECTION_MESSAGES: Partial<Record<NonNullable<Rejection>, string>> = {
-  'out-of-range': 'Sing a note between C3 and C5',
+  'out-of-range': `Sing a note between ${midiToNoteName(MIN_MIDI)} and ${midiToNoteName(MAX_MIDI)}`,
 };
 
 /** Wires the engine, the browser adapters and the DOM. */
@@ -58,6 +59,7 @@ export function createApp() {
     prompt: element('#prompt'),
     staff: element<HTMLDivElement>('#staff'),
     feedback: element('#feedback'),
+    detector: element('#detector'),
     rounds: element('#rounds'),
     firstTry: element('#first-try'),
     accuracy: element('#accuracy'),
@@ -73,6 +75,7 @@ export function createApp() {
   let midiReady = false;
   let hint = '';
   let nextRoundTimer = 0;
+  let detectorShownMs = 0;
 
   function render(): void {
     ui.start.disabled = state.phase !== 'setup';
@@ -126,6 +129,21 @@ export function createApp() {
     render();
   }
 
+  /**
+   * Shows the raw detector output in development builds. Use it to pick the
+   * clarity and level thresholds for a voice.
+   */
+  function showDetector(sample: PitchSample): void {
+    if (!import.meta.env.DEV) return;
+    if (sample.timeMs - detectorShownMs < 100) return;
+    detectorShownMs = sample.timeMs;
+    const hz = sample.frequency === null ? '   --  ' : sample.frequency.toFixed(1).padStart(7);
+    const midi =
+      sample.frequency === null ? '--' : midiToNoteName(frequencyToMidi(sample.frequency));
+    ui.detector.hidden = false;
+    ui.detector.textContent = `${hz} Hz  ${midi.padEnd(4)}  clarity ${sample.clarity.toFixed(2)}  rms ${sample.rms.toFixed(3)}`;
+  }
+
   function setStatus(target: HTMLElement, text: string, ok: boolean): void {
     target.textContent = text;
     target.dataset.state = ok ? 'ready' : 'error';
@@ -137,6 +155,7 @@ export function createApp() {
     ui.start.disabled = true;
     try {
       microphone = await startMicrophone((sample) => {
+        showDetector(sample);
         if (state.phase !== 'listening') return;
         const midi = tracker.push(sample);
         if (midi !== null) {

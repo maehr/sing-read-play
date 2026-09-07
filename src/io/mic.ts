@@ -19,7 +19,9 @@ export interface Microphone {
   stop(): Promise<void>;
 }
 
-const FFT_SIZE = 2048;
+// A frame of 4096 samples holds about 7 periods of E2 (82.41 Hz) at 48 kHz.
+// The McLeod method needs several periods for a stable result.
+const FFT_SIZE = 4096;
 const CLARITY_THRESHOLD = 0.6;
 
 function rootMeanSquare(frame: Float32Array): number {

@@ -47,6 +47,6 @@ Run `npm run format` before you commit. Run `npm test` and `npm run typecheck` b
 - Never push to `main`. Open a pull request with a conventional title. Squash merge it.
 - Add a unit test for every new rule in `src/engine/`.
 - Use A4 = 440 Hz. Spell chromatic notes with sharps only.
-- The sung range is MIDI 48 to 72 (C3 to C5).
+- The sung range is MIDI 40 to 72 (E2 to C5). It covers bass, baritone and tenor voices.
 - Use the GNU AGPL-3.0 license. Never use a permissive license.
 - Pin every GitHub Action to its latest major version.
