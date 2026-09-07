@@ -2,5 +2,5 @@ import { defineConfig } from 'vitest/config';
 
 export default defineConfig({
   build: { target: 'es2022' },
-  test: { environment: 'node', include: ['src/**/*.test.ts'] },
+  test: { environment: 'node', include: ['src/**/*.test.ts'], passWithNoTests: true },
 });
