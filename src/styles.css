@@ -1,0 +1,160 @@
+:root {
+  color-scheme: light dark;
+  --bg: #fbfbfa;
+  --fg: #1b1b1a;
+  --muted: #6b6b68;
+  --line: #d8d8d4;
+  --ok: #1f7a44;
+  --bad: #b3261e;
+  --accent: #2f4f8f;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #16171a;
+    --fg: #ececea;
+    --muted: #9b9b98;
+    --line: #33353a;
+    --ok: #4ac47e;
+    --bad: #ef6a62;
+    --accent: #8fb0f0;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font:
+    16px / 1.5 system-ui,
+    -apple-system,
+    "Segoe UI",
+    sans-serif;
+}
+
+.app {
+  max-width: 42rem;
+  margin: 0 auto;
+  padding: 2rem 1.25rem 4rem;
+  display: grid;
+  gap: 1.5rem;
+}
+
+h1 {
+  margin: 0;
+  font-size: 1.35rem;
+  letter-spacing: -0.01em;
+}
+
+.setup,
+.stats {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 1rem;
+}
+
+.status {
+  list-style: none;
+  margin: 0 0 0.9rem;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.badge {
+  color: var(--fg);
+  font-weight: 600;
+}
+
+.badge[data-state="error"] {
+  color: var(--bad);
+}
+
+.badge[data-state="ready"] {
+  color: var(--ok);
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+select,
+button {
+  font: inherit;
+  padding: 0.45rem 0.8rem;
+  border-radius: 8px;
+  border: 1px solid var(--line);
+  background: var(--bg);
+  color: var(--fg);
+}
+
+button {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+  cursor: pointer;
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.stage {
+  display: grid;
+  gap: 0.75rem;
+  justify-items: center;
+  min-height: 15rem;
+}
+
+.prompt {
+  margin: 0;
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+
+.staff {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.staff svg {
+  display: block;
+  margin: 0 auto;
+}
+
+.feedback {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 600;
+  min-height: 1.5em;
+}
+
+.feedback[data-state="correct"] {
+  color: var(--ok);
+}
+
+.feedback[data-state="incorrect"] {
+  color: var(--bad);
+}
+
+.stats {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.stats p {
+  margin: 0;
+}
