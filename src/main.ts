@@ -1,4 +1,8 @@
 import './styles.css';
+import { createApp } from './view/app.js';
 
-const prompt = document.querySelector<HTMLElement>('#prompt');
-if (prompt) prompt.textContent = 'Press Start.';
+const app = createApp();
+
+if (import.meta.env.DEV) {
+  Object.assign(window, { __srp: app });
+}
