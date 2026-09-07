@@ -13,6 +13,8 @@ export class MicrophoneError extends Error {
 }
 
 export interface Microphone {
+  /** Turns the pitch analysis on or off without releasing the microphone. */
+  setActive(active: boolean): void;
   /** Stops the loop and releases the microphone. */
   stop(): Promise<void>;
 }
@@ -43,7 +45,17 @@ export async function startMicrophone(
   }
 
   const context = new AudioContext();
-  await context.resume();
+  const release = async (): Promise<void> => {
+    for (const track of stream.getTracks()) track.stop();
+    await context.close();
+  };
+
+  try {
+    await context.resume();
+  } catch (error) {
+    await release();
+    throw new MicrophoneError('Could not start the audio input', error);
+  }
 
   const analyser = context.createAnalyser();
   analyser.fftSize = FFT_SIZE;
@@ -53,25 +65,31 @@ export async function startMicrophone(
   detector.clarityThreshold = CLARITY_THRESHOLD;
   const frame = new Float32Array(analyser.fftSize);
 
+  let active = true;
   let frameHandle = 0;
   const read = (): void => {
-    analyser.getFloatTimeDomainData(frame);
-    const [frequency, clarity] = detector.findPitch(frame, context.sampleRate);
-    onSample({
-      frequency: frequency > 0 ? frequency : null,
-      clarity,
-      rms: rootMeanSquare(frame),
-      timeMs: performance.now(),
-    });
+    // Skip the analysis while the app waits for the keyboard. It saves battery.
+    if (active) {
+      analyser.getFloatTimeDomainData(frame);
+      const [frequency, clarity] = detector.findPitch(frame, context.sampleRate);
+      onSample({
+        frequency: frequency > 0 ? frequency : null,
+        clarity,
+        rms: rootMeanSquare(frame),
+        timeMs: performance.now(),
+      });
+    }
     frameHandle = requestAnimationFrame(read);
   };
   frameHandle = requestAnimationFrame(read);
 
   return {
+    setActive(next) {
+      active = next;
+    },
     async stop() {
       cancelAnimationFrame(frameHandle);
-      for (const track of stream.getTracks()) track.stop();
-      await context.close();
+      await release();
     },
   };
 }

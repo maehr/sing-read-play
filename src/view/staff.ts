@@ -1,4 +1,4 @@
-import { Accidental, Formatter, Renderer, Stave, StaveNote, Voice } from 'vexflow';
+import { Accidental, Formatter, Renderer, Stave, StaveNote, Voice } from 'vexflow/bravura';
 import { isSharp, midiToVexKey } from '../engine/music.js';
 
 export type Clef = 'treble' | 'bass' | 'alto' | 'tenor';
@@ -22,8 +22,11 @@ export function isClef(value: string): value is Clef {
 
 /** Creates a VexFlow staff that draws one clef and one note. */
 export function createStaffView(container: HTMLDivElement): StaffView {
-  return {
+  let last: { clef: Clef; midi: number | null } | null = null;
+
+  const view: StaffView = {
     render(clef, midi) {
+      last = { clef, midi };
       container.replaceChildren();
 
       const renderer = new Renderer(container, Renderer.Backends.SVG);
@@ -43,4 +46,13 @@ export function createStaffView(container: HTMLDivElement): StaffView {
       voice.setContext(context).setStave(stave).draw();
     },
   };
+
+  // The music font loads asynchronously. Draw again once the metrics are right.
+  if (document.fonts) {
+    void document.fonts.ready.then(() => {
+      if (last) view.render(last.clef, last.midi);
+    });
+  }
+
+  return view;
 }

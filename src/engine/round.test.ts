@@ -46,7 +46,7 @@ describe('reduce', () => {
     expect(accuracy(right)).toBe(0);
   });
 
-  it('ignores the octave when it does not match', () => {
+  it('treats the same pitch class in a wrong octave as incorrect', () => {
     const state = run([
       { type: 'start' },
       { type: 'pitch-accepted', midi: 60 },

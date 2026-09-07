@@ -71,6 +71,8 @@ export function reduce(state: RoundState, event: RoundEvent): RoundState {
       return { ...state, phase: 'listening', target: null, attempts: 0, lastPlayed: null };
 
     default:
+      // Every event variant is handled above.
+      event satisfies never;
       return state;
   }
 }

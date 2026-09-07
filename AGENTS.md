@@ -48,3 +48,5 @@ Run `npm run format` before you commit. Run `npm test` and `npm run typecheck` b
 - Add a unit test for every new rule in `src/engine/`.
 - Use A4 = 440 Hz. Spell chromatic notes with sharps only.
 - The sung range is MIDI 48 to 72 (C3 to C5).
+- Use the GNU AGPL-3.0 license. Never use a permissive license.
+- Pin every GitHub Action to its latest major version.
