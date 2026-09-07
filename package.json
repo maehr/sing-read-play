@@ -19,5 +19,9 @@
     "typescript": "^7.0.2",
     "vite": "^8.2.2",
     "vitest": "^5.0.0"
+  },
+  "dependencies": {
+    "pitchy": "^4.1.0",
+    "vexflow": "^5.0.0"
   }
 }
