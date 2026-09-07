@@ -48,9 +48,11 @@ export function createStaffView(container: HTMLDivElement): StaffView {
   };
 
   // The music font loads asynchronously. Draw again once the metrics are right.
-  void document.fonts.ready.then(() => {
-    if (last) view.render(last.clef, last.midi);
-  });
+  if (document.fonts) {
+    void document.fonts.ready.then(() => {
+      if (last) view.render(last.clef, last.midi);
+    });
+  }
 
   return view;
 }

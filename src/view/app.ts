@@ -69,6 +69,7 @@ export function createApp() {
   let state: RoundState = INITIAL_STATE;
   let clef: Clef = isClef(ui.clef.value) ? ui.clef.value : 'treble';
   let microphone: Microphone | null = null;
+  let starting = false;
   let midiReady = false;
   let hint = '';
   let nextRoundTimer = 0;
@@ -117,6 +118,7 @@ export function createApp() {
       hint = '';
       tracker.reset();
     }
+    microphone?.setActive(state.phase === 'listening');
     if (state.phase === 'correct') {
       window.clearTimeout(nextRoundTimer);
       nextRoundTimer = window.setTimeout(() => dispatch({ type: 'next' }), NEXT_ROUND_DELAY_MS);
@@ -130,6 +132,9 @@ export function createApp() {
   }
 
   async function start(): Promise<void> {
+    if (starting || microphone) return;
+    starting = true;
+    ui.start.disabled = true;
     try {
       microphone = await startMicrophone((sample) => {
         if (state.phase !== 'listening') return;
