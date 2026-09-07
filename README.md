@@ -5,6 +5,8 @@ note on a USB MIDI keyboard. The app tells you if the note is correct.
 
 The app runs fully in the browser. There is no backend.
 
+The app is live at <https://maehr.github.io/sing-read-play/>.
+
 ## Requirements
 
 - Chrome on a desktop computer
@@ -38,10 +40,14 @@ Press **Start** and sing a note between C3 and C5.
 | `npm run format`    | Apply format and lint fixes.    |
 | `npm run typecheck` | Check the TypeScript types.     |
 
+## Deploy
+
+A push to `main` builds the app and publishes it to GitHub Pages.
+
 ## Specification
 
 See [SPECS.md](SPECS.md).
 
 ## License
 
-[MIT](LICENSE)
+[AGPL-3.0-or-later](LICENSE)
