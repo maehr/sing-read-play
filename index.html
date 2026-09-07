@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Sing → Read → Play</title>
+    <link rel="stylesheet" href="/src/styles.css" />
+  </head>
+  <body>
+    <main class="app">
+      <h1>Sing → Read → Play</h1>
+
+      <section class="setup" aria-label="Setup">
+        <ul class="status">
+          <li>Microphone: <span id="mic-status" class="badge">checking…</span></li>
+          <li>MIDI: <span id="midi-status" class="badge">checking…</span></li>
+        </ul>
+        <div class="controls">
+          <label for="clef">Clef</label>
+          <select id="clef">
+            <option value="treble" selected>Treble</option>
+            <option value="bass">Bass</option>
+            <option value="alto">Alto</option>
+            <option value="tenor">Tenor</option>
+          </select>
+          <button id="start" type="button">Start</button>
+        </div>
+      </section>
+
+      <section class="stage" aria-label="Practice">
+        <p id="prompt" class="prompt" aria-live="polite">Press Start.</p>
+        <div id="staff" class="staff"></div>
+        <p id="feedback" class="feedback" aria-live="assertive"></p>
+      </section>
+
+      <section class="stats" aria-label="Session stats">
+        <p>Rounds: <span id="rounds">0</span></p>
+        <p>First-try correct: <span id="first-try">0</span></p>
+        <p>Accuracy: <span id="accuracy">0</span>%</p>
+      </section>
+    </main>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

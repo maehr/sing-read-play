@@ -1,0 +1,23 @@
+{
+  "name": "sing-read-play",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Browser sight-reading trainer: sing a note, read it on a staff, play it on a MIDI keyboard.",
+  "license": "MIT",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit",
+    "lint": "biome ci .",
+    "format": "biome check --write .",
+    "test": "vitest run"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.5.12",
+    "typescript": "^7.0.2",
+    "vite": "^8.2.2",
+    "vitest": "^5.0.0"
+  }
+}
