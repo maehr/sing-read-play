@@ -51,10 +51,10 @@ describe('createStabilityTracker', () => {
     expect(tracker.rejection()).toBe('unclear');
   });
 
-  it('never accepts a note outside C3 to C5', () => {
-    for (const timeMs of [0, 300, 600]) sing(tracker, 40, timeMs);
+  it('never accepts a note outside E2 to C5', () => {
+    for (const timeMs of [0, 300, 600]) sing(tracker, 36, timeMs);
     expect(tracker.rejection()).toBe('out-of-range');
-    expect(sing(tracker, 40, 900)).toBeNull();
+    expect(sing(tracker, 36, 900)).toBeNull();
   });
 
   it('clears the rejection reason on a good frame', () => {

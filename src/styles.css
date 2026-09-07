@@ -159,6 +159,13 @@ button:disabled {
   margin: 0;
 }
 
+.detector {
+  margin: 0;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
 /* VexFlow draws black glyphs. Invert them for the dark theme. */
 @media (prefers-color-scheme: dark) {
   .staff svg {

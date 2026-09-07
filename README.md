@@ -26,7 +26,7 @@ npm run dev
 ```
 
 Open the printed URL. Allow microphone access. Connect the MIDI keyboard. Select a clef.
-Press **Start** and sing a note between C3 and C5.
+Press **Start** and sing a note between E2 and C5.
 
 ## Scripts
 

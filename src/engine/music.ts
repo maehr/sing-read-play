@@ -3,8 +3,8 @@
 export const A4_MIDI = 69;
 export const A4_HZ = 440;
 
-/** Lowest note the app accepts from the microphone: C3. */
-export const MIN_MIDI = 48;
+/** Lowest note the app accepts from the microphone: E2. It covers bass voices. */
+export const MIN_MIDI = 40;
 /** Highest note the app accepts from the microphone: C5. */
 export const MAX_MIDI = 72;
 

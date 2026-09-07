@@ -76,9 +76,11 @@ Accept a note only when:
 * pitch confidence is sufficient
 * the same MIDI note is stable for ~300 ms
 
-Recommended range:
+Accepted range:
 
-**C3–C5 / MIDI 48–72**
+**E2–C5 / MIDI 40–72**
+
+The range covers bass, baritone and tenor voices.
 
 Ignore pitches outside this range.
 
@@ -211,7 +213,7 @@ Do not react to short noise or speech.
 
 Show:
 
-**Sing a note between C3 and C5**
+**Sing a note between E2 and C5**
 
 ## Suggested Stack
 
