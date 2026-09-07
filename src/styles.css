@@ -158,3 +158,10 @@ button:disabled {
 .stats p {
   margin: 0;
 }
+
+/* VexFlow draws black glyphs. Invert them for the dark theme. */
+@media (prefers-color-scheme: dark) {
+  .staff svg {
+    filter: invert(1);
+  }
+}
