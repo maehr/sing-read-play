@@ -1,4 +1,5 @@
 import { frequencyToMidi, MAX_MIDI, MIN_MIDI, midiToNoteName } from '../engine/music.js';
+import { isStaffSet, type StaffSet } from '../engine/notation.js';
 import {
   accuracy,
   INITIAL_STATE,
@@ -15,7 +16,7 @@ import {
   startMicrophone,
 } from '../io/mic.js';
 import { initMidi, type MidiStatus } from '../io/midi.js';
-import { type Clef, createStaffView, isClef } from './staff.js';
+import { createStaffView } from './staff.js';
 
 const NEXT_ROUND_DELAY_MS = 1000;
 
@@ -74,7 +75,7 @@ export function createApp() {
   const tracker = createStabilityTracker();
 
   let state: RoundState = INITIAL_STATE;
-  let clef: Clef = isClef(ui.clef.value) ? ui.clef.value : 'treble';
+  let staffSet: StaffSet = isStaffSet(ui.clef.value) ? ui.clef.value : 'grand';
   let microphone: Microphone | null = null;
   let starting = false;
   let midiReady = false;
@@ -111,7 +112,7 @@ export function createApp() {
     }
 
     ui.noteName.textContent = targetName();
-    staff.render(clef, state.target);
+    staff.render(staffSet, state.target);
 
     ui.rounds.textContent = String(state.rounds);
     ui.firstTry.textContent = String(state.firstTryCorrect);
@@ -201,7 +202,7 @@ export function createApp() {
   ui.alwaysNames.addEventListener('change', render);
 
   ui.clef.addEventListener('change', () => {
-    if (isClef(ui.clef.value)) clef = ui.clef.value;
+    if (isStaffSet(ui.clef.value)) staffSet = ui.clef.value;
     render();
   });
 

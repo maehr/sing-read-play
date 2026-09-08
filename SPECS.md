@@ -111,10 +111,18 @@ The octave must match.
 
 Display:
 
-* one staff
-* selected clef
+* one or two staves, from the selected staff set
 * one note
 * ledger lines when needed
+
+Staff sets:
+
+* **Grand staff**: treble and bass together
+* **Treble**, **Bass**, **Alto**, **Tenor**: one staff
+
+The grand staff draws the same note in both clefs. A staff drops the note when the
+note needs more than two ledger lines there. A note outside both staves stays on the
+closer staff.
 
 Use a quarter note visually.
 
