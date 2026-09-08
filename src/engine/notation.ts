@@ -66,5 +66,6 @@ export function clefsForNote(clefs: readonly Clef[], midi: number): Clef[] {
 
 /** Reports if the value names a staff set the app supports. */
 export function isStaffSet(value: string): value is StaffSet {
-  return value in STAFF_SETS;
+  // Object.hasOwn ignores inherited keys such as "toString".
+  return Object.hasOwn(STAFF_SETS, value);
 }

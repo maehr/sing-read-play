@@ -71,4 +71,9 @@ describe('isStaffSet', () => {
   it('rejects anything else', () => {
     expect(isStaffSet('soprano')).toBe(false);
   });
+
+  it('rejects inherited keys', () => {
+    expect(isStaffSet('toString')).toBe(false);
+    expect(isStaffSet('__proto__')).toBe(false);
+  });
 });
