@@ -1,5 +1,13 @@
 import { describe, expect, it } from 'vitest';
-import { accuracy, INITIAL_STATE, type RoundEvent, type RoundState, reduce } from './round.js';
+import {
+  accuracy,
+  INITIAL_STATE,
+  type Phase,
+  type RoundEvent,
+  type RoundState,
+  reduce,
+  showsTargetName,
+} from './round.js';
 
 function run(events: RoundEvent[], from: RoundState = INITIAL_STATE): RoundState {
   return events.reduce(reduce, from);
@@ -84,6 +92,24 @@ describe('reduce', () => {
     expect(stopped.phase).toBe('setup');
     expect(stopped.target).toBeNull();
     expect(stopped.rounds).toBe(1);
+  });
+});
+
+describe('showsTargetName', () => {
+  const phases: Phase[] = ['setup', 'listening', 'waiting', 'incorrect'];
+
+  it('hides the name until the round ends', () => {
+    for (const phase of phases) expect(showsTargetName(phase, false)).toBe(false);
+  });
+
+  it('shows the name after a correct answer', () => {
+    expect(showsTargetName('correct', false)).toBe(true);
+  });
+
+  it('shows the name in every phase when the setting is on', () => {
+    for (const phase of [...phases, 'correct' as Phase]) {
+      expect(showsTargetName(phase, true)).toBe(true);
+    }
   });
 });
 

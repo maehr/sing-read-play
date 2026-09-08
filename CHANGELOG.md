@@ -15,6 +15,8 @@ The project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- The name of the target note appears when the round ends. A setting shows the
+  name in every phase. ([#9])
 - A detector readout in development builds. It shows the frequency, the note, the
   clarity and the level. Use it to pick thresholds for a voice. ([#6])
 
@@ -32,3 +34,4 @@ The project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 [unreleased]: https://github.com/maehr/sing-read-play/compare/v0.1.0...HEAD
 [0.1.0]: https://github.com/maehr/sing-read-play/releases/tag/v0.1.0
 [#6]: https://github.com/maehr/sing-read-play/issues/6
+[#9]: https://github.com/maehr/sing-read-play/issues/9

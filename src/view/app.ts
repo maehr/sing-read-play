@@ -5,6 +5,7 @@ import {
   type RoundEvent,
   type RoundState,
   reduce,
+  showsTargetName,
 } from '../engine/round.js';
 import { createStabilityTracker, type PitchSample, type Rejection } from '../engine/stability.js';
 import {
@@ -22,9 +23,11 @@ interface Elements {
   micStatus: HTMLElement;
   midiStatus: HTMLElement;
   clef: HTMLSelectElement;
+  alwaysNames: HTMLInputElement;
   start: HTMLButtonElement;
   prompt: HTMLElement;
   staff: HTMLDivElement;
+  noteName: HTMLElement;
   feedback: HTMLElement;
   detector: HTMLElement;
   rounds: HTMLElement;
@@ -55,9 +58,11 @@ export function createApp() {
     micStatus: element('#mic-status'),
     midiStatus: element('#midi-status'),
     clef: element<HTMLSelectElement>('#clef'),
+    alwaysNames: element<HTMLInputElement>('#always-names'),
     start: element<HTMLButtonElement>('#start'),
     prompt: element('#prompt'),
     staff: element<HTMLDivElement>('#staff'),
+    noteName: element('#note-name'),
     feedback: element('#feedback'),
     detector: element('#detector'),
     rounds: element('#rounds'),
@@ -105,11 +110,23 @@ export function createApp() {
       delete ui.feedback.dataset.state;
     }
 
+    ui.noteName.textContent = targetName();
     staff.render(clef, state.target);
 
     ui.rounds.textContent = String(state.rounds);
     ui.firstTry.textContent = String(state.firstTryCorrect);
     ui.accuracy.textContent = String(accuracy(state));
+  }
+
+  /**
+   * Returns the name of the target note. The name stays hidden until the round
+   * ends, because the name would answer the exercise. A wrong key does not
+   * reveal it. The setting "Always show note names" shows it in every phase.
+   */
+  function targetName(): string {
+    if (state.target === null) return '';
+    if (!showsTargetName(state.phase, ui.alwaysNames.checked)) return '';
+    return midiToNoteName(state.target);
   }
 
   function dispatch(event: RoundEvent): void {
@@ -180,6 +197,8 @@ export function createApp() {
   ui.start.addEventListener('click', () => {
     void start();
   });
+
+  ui.alwaysNames.addEventListener('change', render);
 
   ui.clef.addEventListener('change', () => {
     if (isClef(ui.clef.value)) clef = ui.clef.value;

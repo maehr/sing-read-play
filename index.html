@@ -24,11 +24,16 @@
           </select>
           <button id="start" type="button">Start</button>
         </div>
+        <label class="option">
+          <input id="always-names" type="checkbox" />
+          Always show note names
+        </label>
       </section>
 
       <section class="stage" aria-label="Practice">
         <p id="prompt" class="prompt" aria-live="polite">Press Start.</p>
         <div id="staff" class="staff"></div>
+        <p id="note-name" class="note-name" aria-live="polite"></p>
         <p id="feedback" class="feedback" aria-live="assertive"></p>
         <p id="detector" class="detector" hidden></p>
       </section>

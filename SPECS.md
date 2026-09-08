@@ -126,6 +126,16 @@ For chromatic notes, use sharps only:
 C C# D D# E F F# G G# A A# B
 ```
 
+## Note Names
+
+The name of the target note stays hidden while the user reads the staff.
+A hidden name keeps the reading exercise intact.
+
+Show the name when the round ends.
+
+The setting **Always show note names** shows the name in every phase. It helps a
+beginner learn the staff positions.
+
 ## UI States
 
 ```text
