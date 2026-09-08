@@ -1,6 +1,7 @@
-Here’s the lean English version.
+# Specification – Sing → Read → Play
 
-# MVP Spec – Sing → Read → Play
+This file states what the app does. Update it when the behaviour changes.
+[ROADMAP.md](ROADMAP.md) states what comes next.
 
 ## Goal
 
@@ -8,7 +9,7 @@ A browser-based sight-reading trainer:
 
 **Sing a note → see it in notation → play it on a USB MIDI keyboard → get instant feedback.**
 
-The MVP should validate that this loop is technically reliable and useful for practice.
+The loop must be technically reliable and useful for practice.
 
 ## Platform
 
@@ -233,17 +234,16 @@ Show:
 
 **Sing a note between E2 and C5**
 
-## Suggested Stack
+## Stack
 
-* React
-* TypeScript
-* Vite
-* Web Audio API
-* YIN, McLeod, or autocorrelation for pitch detection
-* Web MIDI API
-* VexFlow for notation
+* TypeScript with the browser DOM. No UI framework.
+* Vite for the build. Biome for format and lint. Vitest for the tests.
+* Web Audio API for the microphone.
+* `pitchy` for pitch detection. It uses the McLeod method.
+* Web MIDI API for the keyboard.
+* VexFlow for the notation.
 
-Everything runs client-side.
+Everything runs client-side. There is no backend.
 
 ## Out of Scope
 
@@ -265,14 +265,14 @@ Do not build:
 * key signatures
 * transposing instruments
 
-## Success Criteria
+## Acceptance Test
 
-The MVP is done when this works reliably:
+The app works when these steps work reliably:
 
 1. Open app in Chrome.
 2. Allow microphone access.
 3. Connect MIDI keyboard.
-4. Select treble or bass clef.
+4. Select a staff set.
 5. Press Start.
 6. Sing C4.
 7. App displays C4 in notation.
