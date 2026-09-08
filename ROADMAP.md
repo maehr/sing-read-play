@@ -42,7 +42,7 @@ chords, intervals, melodies, rhythm training and key signatures.
 ## Version rule
 
 The project follows semantic versioning. A feature raises the minor number. A fix raises the patch
-number. Version 1.0.0 waits until the success criteria in [SPECS.md](SPECS.md) hold in a real
+number. Version 1.0.0 waits until the acceptance test in [SPECS.md](SPECS.md) holds in a real
 practice session.
 
 [#6]: https://github.com/maehr/sing-read-play/issues/6
