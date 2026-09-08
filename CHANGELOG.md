@@ -7,6 +7,8 @@ The project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## [0.1.1] - 2026-09-08
+
 ### Fixed
 
 - The app now accepts sung notes from E2 to C5. The old floor of C3 rejected the
@@ -34,7 +36,8 @@ The project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 - Session stats: rounds, first-try correct and accuracy.
 - Automatic deployment to GitHub Pages.
 
-[unreleased]: https://github.com/maehr/sing-read-play/compare/v0.1.0...HEAD
+[unreleased]: https://github.com/maehr/sing-read-play/compare/v0.1.1...HEAD
+[0.1.1]: https://github.com/maehr/sing-read-play/compare/v0.1.0...v0.1.1
 [0.1.0]: https://github.com/maehr/sing-read-play/releases/tag/v0.1.0
 [#6]: https://github.com/maehr/sing-read-play/issues/6
 [#9]: https://github.com/maehr/sing-read-play/issues/9

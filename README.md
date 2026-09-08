@@ -25,8 +25,8 @@ npm install
 npm run dev
 ```
 
-Open the printed URL. Allow microphone access. Connect the MIDI keyboard. Select a clef.
-Press **Start** and sing a note between E2 and C5.
+Open the printed URL. Allow microphone access. Connect the MIDI keyboard.
+Select a staff set. Press **Start** and sing a note between E2 and C5.
 
 ## Scripts
 
@@ -46,7 +46,9 @@ A push to `main` builds the app and publishes it to GitHub Pages.
 
 ## Specification
 
-See [SPECS.md](SPECS.md).
+- [SPECS.md](SPECS.md) states what the app does.
+- [ROADMAP.md](ROADMAP.md) states what comes next.
+- [CHANGELOG.md](CHANGELOG.md) lists the changes per version.
 
 ## License
 

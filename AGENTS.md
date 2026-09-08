@@ -7,7 +7,8 @@ Machine contract for `sing-read-play`. Read this file before you change code.
 A browser sight-reading trainer. The user sings a note. The app shows the note on a staff. The user
 plays the note on a USB MIDI keyboard. The app gives instant feedback.
 
-`SPECS.md` is the product specification. Do not add features outside it.
+`SPECS.md` is the product specification. `ROADMAP.md` states what comes next. Features come from
+the open issues. Update `SPECS.md` in the same pull request when the behaviour changes.
 
 ## Stack
 
