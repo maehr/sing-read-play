@@ -77,6 +77,17 @@ export function reduce(state: RoundState, event: RoundEvent): RoundState {
   }
 }
 
+/**
+ * Reports if the app may show the name of the target note.
+ *
+ * The name stays hidden until the round ends, because a visible name answers
+ * the reading exercise. A wrong key does not reveal it either. The setting
+ * "Always show note names" shows the name in every phase.
+ */
+export function showsTargetName(phase: Phase, alwaysShow: boolean): boolean {
+  return alwaysShow || phase === 'correct';
+}
+
 /** Returns the share of first-try correct rounds as a whole percentage. */
 export function accuracy(state: RoundState): number {
   if (state.rounds === 0) return 0;

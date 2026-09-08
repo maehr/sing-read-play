@@ -5,6 +5,7 @@ import {
   type RoundEvent,
   type RoundState,
   reduce,
+  showsTargetName,
 } from '../engine/round.js';
 import { createStabilityTracker, type PitchSample, type Rejection } from '../engine/stability.js';
 import {
@@ -124,7 +125,7 @@ export function createApp() {
    */
   function targetName(): string {
     if (state.target === null) return '';
-    if (!ui.alwaysNames.checked && state.phase !== 'correct') return '';
+    if (!showsTargetName(state.phase, ui.alwaysNames.checked)) return '';
     return midiToNoteName(state.target);
   }
 
